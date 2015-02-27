@@ -148,6 +148,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	  fetchYoutubeData:function() {
 	    var id = this.props.videoId;
+	    var _this = this;
 
 	    ajax.get({
 	      url: ("//gdata.youtube.com/feeds/api/videos/" + id + "?v=2&alt=json"),
@@ -155,26 +156,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var gallery = res.entry['media$group']['media$thumbnail'];
 	        var thumb = gallery.sort(function(a, b)  {return b.width - a.width;})[0].url;
 
-	        this.setState({
+	        _this.setState({
 	          thumb: thumb,
 	          imageLoaded: true
 	        })
 	      },
-	      onError: this.props.onError
+	      onError: _this.props.onError
 	    });
 	  },
 	  fetchVimeoData:function() {
 	    var id = this.props.videoId;
+	    var _this = this;
 
 	    ajax.get({
 	      url: ("//vimeo.com/api/v2/video/" + id + ".json"),
 	      onSuccess:function(err, res) {
-	        this.setState({
+	        _this.setState({
 	          thumb: res[0].thumbnail_large,
 	          imageLoaded: true
 	        });
 	      },
-	      onError: this.props.onError
+	      onError: _this.props.onError
 	    });
 	  }
 	});
